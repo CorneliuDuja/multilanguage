@@ -1,5 +1,7 @@
 package md.zamolxis.multilanguage.service.impl;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -7,12 +9,9 @@ import md.zamolxis.multilanguage.exception.ServiceException;
 import md.zamolxis.multilanguage.model.TenantModel;
 import md.zamolxis.multilanguage.model.predicate.TenantPredicate;
 import md.zamolxis.multilanguage.repository.TenantRepository;
+import md.zamolxis.multilanguage.service.GenericOutput;
 import md.zamolxis.multilanguage.service.GenericService;
 import md.zamolxis.multilanguage.service.TenantService;
-
-import java.util.Collection;
-
-import javax.transaction.Transactional;
 
 @Service
 public class TenantServiceImpl extends GenericService implements TenantService {
@@ -67,8 +66,10 @@ public class TenantServiceImpl extends GenericService implements TenantService {
 	}
 
 	@Override
-	public Collection<TenantModel> select(TenantPredicate predicate) {
-		return tenantRepository.findAll();
+	public GenericOutput<TenantModel> select(TenantPredicate predicate) {
+		GenericOutput<TenantModel> genericOutput = new GenericOutput<TenantModel>();
+		genericOutput.setGenericModels(tenantRepository.findAll());
+		return genericOutput;
 	}
 
 }

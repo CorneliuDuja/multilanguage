@@ -2,15 +2,22 @@ package md.zamolxis.multilanguage.model;
 
 import java.sql.Timestamp;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
-@Entity
+@Entity(name = "resource")
 @Table(name = "ml_resource", uniqueConstraints = @UniqueConstraint(columnNames = { "tenant", "code",
-		"category" }, name = "uk_resource_tenant_code_category"))
+		"category" }, name = "ml_uk_resource_tenant_code_category"))
 public class ResourceModel extends GenericModel {
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "tenant", columnDefinition = UUID, nullable = false, insertable = true, updatable = false, foreignKey = @ForeignKey(name = "fk_resource_tenant"))
+	@JoinColumn(name = "tenant", columnDefinition = UUID, nullable = false, insertable = true, updatable = false, foreignKey = @ForeignKey(name = "ml_fk_resource_tenant"))
 	private TenantModel tenant;
 
 	@Column(name = "code", columnDefinition = CODE, nullable = false, insertable = true, updatable = false)

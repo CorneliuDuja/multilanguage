@@ -4,8 +4,6 @@ import md.zamolxis.multilanguage.exception.ServiceException;
 import md.zamolxis.multilanguage.model.TenantModel;
 import md.zamolxis.multilanguage.model.predicate.TenantPredicate;
 
-import java.util.Collection;
-
 public interface TenantService {
 
 	TenantModel create(TenantModel tenant) throws ServiceException;
@@ -16,6 +14,6 @@ public interface TenantService {
 
 	void delete(TenantModel tenant) throws ServiceException;
 
-	Collection<TenantModel> select(TenantPredicate predicate) throws ServiceException;
+	GenericOutput<TenantModel> select(TenantPredicate predicate) throws ServiceException;
 
 }

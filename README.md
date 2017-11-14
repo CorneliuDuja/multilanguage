@@ -1,6 +1,6 @@
 Configuration:
 
-src/main/resources/application.properties
+src/main/resources/multilanguage.properties
 
 
 Commands:

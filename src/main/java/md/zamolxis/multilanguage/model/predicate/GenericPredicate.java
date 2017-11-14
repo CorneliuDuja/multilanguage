@@ -1,8 +1,5 @@
 package md.zamolxis.multilanguage.model.predicate;
 
-import javax.persistence.*;
-
-@MappedSuperclass
 public abstract class GenericPredicate {
 
 	private boolean isExcluded;

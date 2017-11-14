@@ -3,7 +3,12 @@ package md.zamolxis.multilanguage.model;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 
 import org.hibernate.annotations.GenericGenerator;
 

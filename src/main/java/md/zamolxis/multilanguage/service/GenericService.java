@@ -7,12 +7,16 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import md.zamolxis.multilanguage.model.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import md.zamolxis.multilanguage.exception.ExceptionData.ExceptionDataType;
 import md.zamolxis.multilanguage.exception.ServiceException;
+import md.zamolxis.multilanguage.model.CultureModel;
+import md.zamolxis.multilanguage.model.GenericModel;
+import md.zamolxis.multilanguage.model.ResourceModel;
+import md.zamolxis.multilanguage.model.TenantModel;
+import md.zamolxis.multilanguage.model.TranslationModel;
 
 public abstract class GenericService {
 

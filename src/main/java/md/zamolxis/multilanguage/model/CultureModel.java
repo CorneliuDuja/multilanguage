@@ -1,14 +1,21 @@
 package md.zamolxis.multilanguage.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
-@Entity
+@Entity(name = "culture")
 @Table(name = "ml_culture", uniqueConstraints = @UniqueConstraint(columnNames = { "tenant",
-		"code" }, name = "uk_culture_tenant_code"))
+		"code" }, name = "ml_uk_culture_tenant_code"))
 public class CultureModel extends GenericModel {
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "tenant", columnDefinition = UUID, nullable = false, insertable = true, updatable = false, foreignKey = @ForeignKey(name = "fk_culture_tenant"))
+	@JoinColumn(name = "tenant", columnDefinition = UUID, nullable = false, insertable = true, updatable = false, foreignKey = @ForeignKey(name = "ml_fk_culture_tenant"))
 	private TenantModel tenant;
 
 	@Column(name = "code", columnDefinition = CODE, nullable = false, insertable = true, updatable = false)

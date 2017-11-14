@@ -1,9 +1,12 @@
 package md.zamolxis.multilanguage.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
-@Entity
-@Table(name = "ml_tenant", uniqueConstraints = @UniqueConstraint(columnNames = { "code" }, name = "uk_tenant_code"))
+@Entity(name = "tenant")
+@Table(name = "ml_tenant", uniqueConstraints = @UniqueConstraint(columnNames = { "code" }, name = "ml_uk_tenant_code"))
 public class TenantModel extends GenericModel {
 
 	@Column(name = "code", columnDefinition = CODE, nullable = false, insertable = true, updatable = false)
