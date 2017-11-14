@@ -1,0 +1,15 @@
+.idea
+.idea/*
+.tmp
+.classpath
+.settings
+.project
+.DS_Store
+/.metadata/
+*.iml
+app
+dist
+node_modules
+bower_components
+target
+bin
