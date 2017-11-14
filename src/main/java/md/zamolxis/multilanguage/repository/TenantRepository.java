@@ -4,11 +4,11 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import md.zamolxis.multilanguage.model.TenantModel;
+import md.zamolxis.multilanguage.entity.TenantEntity;
 
-public interface TenantRepository extends JpaRepository<TenantModel, String> {
+public interface TenantRepository extends JpaRepository<TenantEntity, String> {
 
 	@Query("select x from tenant x where x.code = :code")
-	TenantModel find(@Param("code") String code);
+	TenantEntity find(@Param("code") String code);
 
 }

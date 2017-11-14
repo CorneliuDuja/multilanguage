@@ -1,4 +1,4 @@
-package md.zamolxis.multilanguage.model;
+package md.zamolxis.multilanguage.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,11 +12,11 @@ import javax.persistence.UniqueConstraint;
 @Entity(name = "culture")
 @Table(name = "ml_culture", uniqueConstraints = @UniqueConstraint(columnNames = { "tenant",
 		"code" }, name = "ml_uk_culture_tenant_code"))
-public class CultureModel extends GenericModel {
+public class CultureEntity extends GenericEntity {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "tenant", columnDefinition = UUID, nullable = false, insertable = true, updatable = false, foreignKey = @ForeignKey(name = "ml_fk_culture_tenant"))
-	private TenantModel tenant;
+	private TenantEntity tenant;
 
 	@Column(name = "code", columnDefinition = CODE, nullable = false, insertable = true, updatable = false)
 	private String code;
@@ -27,11 +27,11 @@ public class CultureModel extends GenericModel {
 	@Column(name = "description", columnDefinition = TEXT, nullable = true, insertable = true, updatable = true)
 	private String description;
 
-	public TenantModel getTenant() {
+	public TenantEntity getTenant() {
 		return tenant;
 	}
 
-	public void setTenant(TenantModel tenant) {
+	public void setTenant(TenantEntity tenant) {
 		this.tenant = tenant;
 	}
 

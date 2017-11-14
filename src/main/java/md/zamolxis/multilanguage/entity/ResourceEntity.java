@@ -1,4 +1,4 @@
-package md.zamolxis.multilanguage.model;
+package md.zamolxis.multilanguage.entity;
 
 import java.sql.Timestamp;
 
@@ -14,11 +14,11 @@ import javax.persistence.UniqueConstraint;
 @Entity(name = "resource")
 @Table(name = "ml_resource", uniqueConstraints = @UniqueConstraint(columnNames = { "tenant", "code",
 		"category" }, name = "ml_uk_resource_tenant_code_category"))
-public class ResourceModel extends GenericModel {
+public class ResourceEntity extends GenericEntity {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "tenant", columnDefinition = UUID, nullable = false, insertable = true, updatable = false, foreignKey = @ForeignKey(name = "ml_fk_resource_tenant"))
-	private TenantModel tenant;
+	private TenantEntity tenant;
 
 	@Column(name = "code", columnDefinition = CODE, nullable = false, insertable = true, updatable = false)
 	private String code;
@@ -32,11 +32,11 @@ public class ResourceModel extends GenericModel {
 	@Column(name = "used", nullable = false, insertable = true, updatable = true)
 	private Timestamp used;
 
-	public TenantModel getTenant() {
+	public TenantEntity getTenant() {
 		return tenant;
 	}
 
-	public void setTenant(TenantModel tenant) {
+	public void setTenant(TenantEntity tenant) {
 		this.tenant = tenant;
 	}
 

@@ -1,4 +1,4 @@
-package md.zamolxis.multilanguage.model.predicate;
+package md.zamolxis.multilanguage.entity.predicate;
 
 public abstract class GenericPredicate {
 

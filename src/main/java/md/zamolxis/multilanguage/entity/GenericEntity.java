@@ -1,4 +1,4 @@
-package md.zamolxis.multilanguage.model;
+package md.zamolxis.multilanguage.entity;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
@@ -13,7 +13,7 @@ import javax.persistence.PreUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
 @MappedSuperclass
-public abstract class GenericModel {
+public abstract class GenericEntity {
 
 	public static final String UUID = "VARCHAR(36)";
 	public static final String CODE = "VARCHAR(200)";
@@ -61,7 +61,7 @@ public abstract class GenericModel {
 	public boolean equals(Object object) {
 		boolean equals = false;
 		if (id != null && object != null && this.getClass().equals(object.getClass())) {
-			GenericModel generic = (GenericModel) object;
+			GenericEntity generic = (GenericEntity) object;
 			if (generic != null && id.equals(generic.getId())) {
 				equals = true;
 			}

@@ -66,7 +66,7 @@ public class MultilanguageConfiguration {
 			throws ClassNotFoundException, PropertyVetoException {
 		LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 		entityManagerFactoryBean.setDataSource(dataSource());
-		entityManagerFactoryBean.setPackagesToScan("md.zamolxis.multilanguage.model");
+		entityManagerFactoryBean.setPackagesToScan("md.zamolxis.multilanguage.entity");
 		entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
 		Properties properties = new Properties();
 		properties.put(PROPERTY_NAME_HIBERNATE_DIALECT,

@@ -4,14 +4,14 @@ import java.util.Collection;
 
 public class GenericOutput<T> {
 
-	private Collection<T> genericModels;
+	private Collection<T> genericEntities;
 
-	public Collection<T> getGenericModels() {
-		return genericModels;
+	public Collection<T> getGenericEntities() {
+		return genericEntities;
 	}
 
-	public void setGenericModels(Collection<T> genericModels) {
-		this.genericModels = genericModels;
+	public void setGenericEntities(Collection<T> genericEntities) {
+		this.genericEntities = genericEntities;
 	}
 
 }

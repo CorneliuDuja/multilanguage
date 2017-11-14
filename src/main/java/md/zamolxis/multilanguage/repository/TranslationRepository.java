@@ -4,13 +4,13 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import md.zamolxis.multilanguage.model.CultureModel;
-import md.zamolxis.multilanguage.model.ResourceModel;
-import md.zamolxis.multilanguage.model.TranslationModel;
+import md.zamolxis.multilanguage.entity.CultureEntity;
+import md.zamolxis.multilanguage.entity.ResourceEntity;
+import md.zamolxis.multilanguage.entity.TranslationEntity;
 
-public interface TranslationRepository extends JpaRepository<TranslationModel, String> {
+public interface TranslationRepository extends JpaRepository<TranslationEntity, String> {
 
 	@Query("select x from translation x where x.culture = :culture and x.resource = :resource")
-	TranslationModel find(@Param("culture") CultureModel culture, @Param("resource") ResourceModel resource);
+	TranslationEntity find(@Param("culture") CultureEntity culture, @Param("resource") ResourceEntity resource);
 
 }

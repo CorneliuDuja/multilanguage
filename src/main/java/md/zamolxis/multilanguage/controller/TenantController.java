@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import md.zamolxis.multilanguage.entity.TenantEntity;
+import md.zamolxis.multilanguage.entity.predicate.TenantPredicate;
 import md.zamolxis.multilanguage.exception.ServiceException;
-import md.zamolxis.multilanguage.model.TenantModel;
-import md.zamolxis.multilanguage.model.predicate.TenantPredicate;
 import md.zamolxis.multilanguage.service.GenericOutput;
 import md.zamolxis.multilanguage.service.TenantService;
 
@@ -22,28 +22,28 @@ public class TenantController {
 	public TenantService tenantService;
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public ResponseEntity<?> create(@RequestBody TenantModel tenant) throws ServiceException {
+	public ResponseEntity<?> create(@RequestBody TenantEntity tenant) throws ServiceException {
 		return new ResponseEntity<>(tenantService.create(tenant), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/read", method = RequestMethod.POST)
-	public ResponseEntity<?> read(@RequestBody TenantModel tenant) throws ServiceException {
+	public ResponseEntity<?> read(@RequestBody TenantEntity tenant) throws ServiceException {
 		return new ResponseEntity<>(tenantService.read(tenant), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public ResponseEntity<?> update(@RequestBody TenantModel tenant) throws ServiceException {
+	public ResponseEntity<?> update(@RequestBody TenantEntity tenant) throws ServiceException {
 		return new ResponseEntity<>(tenantService.update(tenant), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public ResponseEntity<?> delete(@RequestBody TenantModel tenant) throws ServiceException {
+	public ResponseEntity<?> delete(@RequestBody TenantEntity tenant) throws ServiceException {
 		tenantService.delete(tenant);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/select", method = RequestMethod.POST)
-	public ResponseEntity<GenericOutput<TenantModel>> select(@RequestBody TenantPredicate predicate)
+	public ResponseEntity<GenericOutput<TenantEntity>> select(@RequestBody TenantPredicate predicate)
 			throws ServiceException {
 		return new ResponseEntity<>(tenantService.select(predicate), HttpStatus.OK);
 	}

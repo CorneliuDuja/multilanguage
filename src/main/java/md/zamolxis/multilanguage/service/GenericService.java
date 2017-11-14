@@ -10,13 +10,13 @@ import javax.persistence.EntityManager;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import md.zamolxis.multilanguage.entity.CultureEntity;
+import md.zamolxis.multilanguage.entity.GenericEntity;
+import md.zamolxis.multilanguage.entity.ResourceEntity;
+import md.zamolxis.multilanguage.entity.TenantEntity;
+import md.zamolxis.multilanguage.entity.TranslationEntity;
 import md.zamolxis.multilanguage.exception.ExceptionData.ExceptionDataType;
 import md.zamolxis.multilanguage.exception.ServiceException;
-import md.zamolxis.multilanguage.model.CultureModel;
-import md.zamolxis.multilanguage.model.GenericModel;
-import md.zamolxis.multilanguage.model.ResourceModel;
-import md.zamolxis.multilanguage.model.TenantModel;
-import md.zamolxis.multilanguage.model.TranslationModel;
 
 public abstract class GenericService {
 
@@ -26,30 +26,33 @@ public abstract class GenericService {
 	@Autowired
 	protected EntityManager entityManager;
 
-	public static final String TenantName = TenantModel.class.getSimpleName();
-	public static final String CultureName = CultureModel.class.getSimpleName();
-	public static final String ResourceName = ResourceModel.class.getSimpleName();
-	public static final String TranslationName = TranslationModel.class.getSimpleName();
+	public static final String TenantName = TenantEntity.class.getSimpleName();
+	public static final String CultureName = CultureEntity.class.getSimpleName();
+	public static final String ResourceName = ResourceEntity.class.getSimpleName();
+	public static final String TranslationName = TranslationEntity.class.getSimpleName();
 
-	public void entityNotDefined(GenericModel generic, String name) throws ServiceException {
-		if (generic != null)
+	public void entityNotDefined(GenericEntity generic, String name) throws ServiceException {
+		if (generic != null) {
 			return;
+		}
 		throw new ServiceException(ExceptionDataType.ENTITY_NOT_DEFINED, new Object[] { name });
 	}
 
-	public void createUniqueViolation(GenericModel generic, String name) throws ServiceException {
-		if (generic == null)
+	public void createUniqueViolation(GenericEntity generic, String name) throws ServiceException {
+		if (generic == null) {
 			return;
+		}
 		throw new ServiceException(ExceptionDataType.CREATE_UNIQUE_VIOLATION, new Object[] { name });
 	}
 
-	public void readNotFound(GenericModel generic, String name) throws ServiceException {
-		if (generic != null)
+	public void readNotFound(GenericEntity generic, String name) throws ServiceException {
+		if (generic != null) {
 			return;
+		}
 		throw new ServiceException(ExceptionDataType.READ_NOT_FOUND, new Object[] { name });
 	}
 
-	public void updateObsoleteTimestamp(GenericModel current, GenericModel previous, String name)
+	public void updateObsoleteTimestamp(GenericEntity current, GenericEntity previous, String name)
 			throws ServiceException {
 		entityNotDefined(current, name);
 		readNotFound(previous, name);
@@ -58,7 +61,7 @@ public abstract class GenericService {
 		}
 	}
 
-	public void deleteObsoleteTimestamp(GenericModel current, GenericModel previous, String name)
+	public void deleteObsoleteTimestamp(GenericEntity current, GenericEntity previous, String name)
 			throws ServiceException {
 		entityNotDefined(current, name);
 		readNotFound(previous, name);
