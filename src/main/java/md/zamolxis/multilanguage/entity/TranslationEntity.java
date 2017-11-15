@@ -8,20 +8,24 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
 @Entity(name = "translation")
 @Table(name = "ml_translation", uniqueConstraints = @UniqueConstraint(columnNames = { "culture",
 		"resource" }, name = "ml_uk_translation_culture_resource"))
 public class TranslationEntity extends GenericEntity {
 
+	@NotNull
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "culture", columnDefinition = UUID, nullable = false, insertable = true, updatable = false, foreignKey = @ForeignKey(name = "ml_fk_translation_culture"))
 	private CultureEntity culture;
 
+	@NotNull
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "resource", columnDefinition = UUID, nullable = false, insertable = true, updatable = false, foreignKey = @ForeignKey(name = "ml_fk_translation_resource"))
 	private ResourceEntity resource;
 
+	@NotNull
 	@Column(name = "sense", columnDefinition = CODE, nullable = false, insertable = true, updatable = true)
 	private String sense;
 

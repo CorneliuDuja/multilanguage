@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import md.zamolxis.multilanguage.entity.TenantEntity;
 import md.zamolxis.multilanguage.entity.predicate.TenantPredicate;
-import md.zamolxis.multilanguage.exception.ServiceException;
+import md.zamolxis.multilanguage.exception.MultilanguageException;
 import md.zamolxis.multilanguage.repository.TenantRepository;
 import md.zamolxis.multilanguage.service.GenericOutput;
 import md.zamolxis.multilanguage.service.GenericService;
@@ -21,7 +21,7 @@ public class TenantServiceImpl extends GenericService implements TenantService {
 
 	@Override
 	@Transactional(rollbackOn = Exception.class)
-	public TenantEntity create(TenantEntity tenant) throws ServiceException {
+	public TenantEntity create(TenantEntity tenant) throws MultilanguageException {
 		entityNotDefined(tenant, GenericService.TenantName);
 		TenantEntity read = read(tenant);
 		createUniqueViolation(read, GenericService.TenantName);
@@ -30,7 +30,7 @@ public class TenantServiceImpl extends GenericService implements TenantService {
 
 	@Override
 	@Transactional(rollbackOn = Exception.class)
-	public TenantEntity read(TenantEntity tenant) throws ServiceException {
+	public TenantEntity read(TenantEntity tenant) throws MultilanguageException {
 		TenantEntity find = null;
 		if (tenant != null) {
 			String id = tenant.getId();
@@ -50,7 +50,7 @@ public class TenantServiceImpl extends GenericService implements TenantService {
 
 	@Override
 	@Transactional(rollbackOn = Exception.class)
-	public TenantEntity update(TenantEntity tenant) throws ServiceException {
+	public TenantEntity update(TenantEntity tenant) throws MultilanguageException {
 		TenantEntity read = read(tenant);
 		updateObsoleteTimestamp(tenant, read, GenericService.TenantName);
 		copyProperties(tenant, read);
@@ -59,7 +59,7 @@ public class TenantServiceImpl extends GenericService implements TenantService {
 
 	@Override
 	@Transactional(rollbackOn = Exception.class)
-	public void delete(TenantEntity tenant) throws ServiceException {
+	public void delete(TenantEntity tenant) throws MultilanguageException {
 		TenantEntity read = read(tenant);
 		deleteObsoleteTimestamp(tenant, read, GenericService.TenantName);
 		tenantRepository.delete(tenant);

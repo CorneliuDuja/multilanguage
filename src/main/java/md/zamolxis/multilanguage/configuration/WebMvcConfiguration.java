@@ -17,4 +17,5 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
 				.allowedOrigins("*").allowCredentials(true)
 				.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "PATCH").maxAge(1209600);
 	}
+
 }

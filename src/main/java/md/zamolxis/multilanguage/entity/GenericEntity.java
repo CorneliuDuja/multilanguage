@@ -19,6 +19,9 @@ public abstract class GenericEntity {
 	public static final String CODE = "VARCHAR(200)";
 	public static final String TEXT = "TEXT";
 	public static final CharSequence DELIMITER = ", ";
+	
+	public static final int MIN_VARCHAR = 1;
+	public static final int MAX_VARCHAR = 200;
 
 	@Id
 	@GeneratedValue(generator = "uuid2")

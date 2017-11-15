@@ -15,8 +15,8 @@ import md.zamolxis.multilanguage.entity.GenericEntity;
 import md.zamolxis.multilanguage.entity.ResourceEntity;
 import md.zamolxis.multilanguage.entity.TenantEntity;
 import md.zamolxis.multilanguage.entity.TranslationEntity;
-import md.zamolxis.multilanguage.exception.ExceptionData.ExceptionDataType;
-import md.zamolxis.multilanguage.exception.ServiceException;
+import md.zamolxis.multilanguage.exception.MultilanguageExceptionData.MultilanguageExceptionDataType;
+import md.zamolxis.multilanguage.exception.MultilanguageException;
 
 public abstract class GenericService {
 
@@ -31,42 +31,42 @@ public abstract class GenericService {
 	public static final String ResourceName = ResourceEntity.class.getSimpleName();
 	public static final String TranslationName = TranslationEntity.class.getSimpleName();
 
-	public void entityNotDefined(GenericEntity generic, String name) throws ServiceException {
+	public void entityNotDefined(GenericEntity generic, String name) throws MultilanguageException {
 		if (generic != null) {
 			return;
 		}
-		throw new ServiceException(ExceptionDataType.ENTITY_NOT_DEFINED, new Object[] { name });
+		throw new MultilanguageException(MultilanguageExceptionDataType.ENTITY_NOT_DEFINED, new Object[] { name });
 	}
 
-	public void createUniqueViolation(GenericEntity generic, String name) throws ServiceException {
+	public void createUniqueViolation(GenericEntity generic, String name) throws MultilanguageException {
 		if (generic == null) {
 			return;
 		}
-		throw new ServiceException(ExceptionDataType.CREATE_UNIQUE_VIOLATION, new Object[] { name });
+		throw new MultilanguageException(MultilanguageExceptionDataType.CREATE_UNIQUE_VIOLATION, new Object[] { name });
 	}
 
-	public void readNotFound(GenericEntity generic, String name) throws ServiceException {
+	public void readNotFound(GenericEntity generic, String name) throws MultilanguageException {
 		if (generic != null) {
 			return;
 		}
-		throw new ServiceException(ExceptionDataType.READ_NOT_FOUND, new Object[] { name });
+		throw new MultilanguageException(MultilanguageExceptionDataType.READ_NOT_FOUND, new Object[] { name });
 	}
 
 	public void updateObsoleteTimestamp(GenericEntity current, GenericEntity previous, String name)
-			throws ServiceException {
+			throws MultilanguageException {
 		entityNotDefined(current, name);
 		readNotFound(previous, name);
 		if (!equals(previous.getVersion(), current.getVersion())) {
-			throw new ServiceException(ExceptionDataType.UPDATE_OBSOLETE_TIMESTAMP, new Object[] { name });
+			throw new MultilanguageException(MultilanguageExceptionDataType.UPDATE_OBSOLETE_TIMESTAMP, new Object[] { name });
 		}
 	}
 
 	public void deleteObsoleteTimestamp(GenericEntity current, GenericEntity previous, String name)
-			throws ServiceException {
+			throws MultilanguageException {
 		entityNotDefined(current, name);
 		readNotFound(previous, name);
 		if (!equals(previous.getVersion(), current.getVersion())) {
-			throw new ServiceException(ExceptionDataType.DELETE_OBSOLETE_TIMESTAMP, new Object[] { name });
+			throw new MultilanguageException(MultilanguageExceptionDataType.DELETE_OBSOLETE_TIMESTAMP, new Object[] { name });
 		}
 	}
 
