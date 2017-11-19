@@ -15,7 +15,8 @@ import md.zamolxis.multilanguage.exception.MultilanguageExceptionData.Multilangu
 public class ExceptionController {
 
 	private ResponseEntity<MultilanguageExceptionData> create(MultilanguageExceptionData multilanguageExceptionData) {
-		return new ResponseEntity<MultilanguageExceptionData>(multilanguageExceptionData, multilanguageExceptionData.getHttpStatus());
+		return new ResponseEntity<MultilanguageExceptionData>(multilanguageExceptionData,
+				multilanguageExceptionData.getHttpStatus());
 	}
 
 	private MultilanguageExceptionData unhandled(String message) {
@@ -23,13 +24,15 @@ public class ExceptionController {
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<MultilanguageExceptionData> handle(MethodArgumentNotValidException methodArgumentNotValidException) {
+	public ResponseEntity<MultilanguageExceptionData> handle(
+			MethodArgumentNotValidException methodArgumentNotValidException) {
 		MultilanguageExceptionData multilanguageExceptionData;
 		FieldError fieldError = methodArgumentNotValidException.getBindingResult().getFieldError();
 		if (fieldError == null) {
 			multilanguageExceptionData = unhandled(methodArgumentNotValidException.getMessage());
 		} else {
-			multilanguageExceptionData = new MultilanguageExceptionData(MultilanguageExceptionDataType.ENTITY_PROPERTY_NOT_VALID, "", fieldError.getField(),
+			multilanguageExceptionData = new MultilanguageExceptionData(
+					MultilanguageExceptionDataType.ENTITY_PROPERTY_NOT_VALID, "", fieldError.getField(),
 					fieldError.getObjectName(), fieldError.getDefaultMessage());
 		}
 		multilanguageExceptionData.setHttpStatus(HttpStatus.BAD_REQUEST);
@@ -45,8 +48,8 @@ public class ExceptionController {
 
 	@ExceptionHandler(PersistenceException.class)
 	public ResponseEntity<MultilanguageExceptionData> handle(PersistenceException persistenceException) {
-		MultilanguageExceptionData multilanguageExceptionData = new MultilanguageExceptionData(MultilanguageExceptionDataType.UNHANDLED_PESISTENCE_EXCEPTION, "",
-				persistenceException.getMessage());
+		MultilanguageExceptionData multilanguageExceptionData = new MultilanguageExceptionData(
+				MultilanguageExceptionDataType.UNHANDLED_PESISTENCE_EXCEPTION, "", persistenceException.getMessage());
 		multilanguageExceptionData.setHttpStatus(HttpStatus.BAD_REQUEST);
 		return create(multilanguageExceptionData);
 	}

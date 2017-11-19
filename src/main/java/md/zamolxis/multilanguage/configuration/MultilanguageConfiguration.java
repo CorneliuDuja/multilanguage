@@ -96,4 +96,5 @@ public class MultilanguageConfiguration {
 				.setLatencyDays(Integer.parseInt(environment.getRequiredProperty(PROPERTY_NAME_SETTINGS_LATENCY_DAYS)));
 		return settingsService;
 	}
+
 }

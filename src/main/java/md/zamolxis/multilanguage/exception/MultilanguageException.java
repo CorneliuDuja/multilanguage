@@ -11,7 +11,8 @@ public class MultilanguageException extends Exception {
 
 	public MultilanguageException(MultilanguageExceptionDataType multilanguageExceptionDataType, Object... parameters) {
 		super(MessageFormat.format(multilanguageExceptionDataType.getPattern(), parameters));
-		this.multilanguageExceptionData = new MultilanguageExceptionData(multilanguageExceptionDataType, "", parameters);
+		this.multilanguageExceptionData = new MultilanguageExceptionData(multilanguageExceptionDataType, "",
+				parameters);
 	}
 
 	public MultilanguageException(String pattern, Object... parameters) {

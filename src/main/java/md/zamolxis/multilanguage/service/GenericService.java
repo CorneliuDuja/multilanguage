@@ -15,8 +15,8 @@ import md.zamolxis.multilanguage.entity.GenericEntity;
 import md.zamolxis.multilanguage.entity.ResourceEntity;
 import md.zamolxis.multilanguage.entity.TenantEntity;
 import md.zamolxis.multilanguage.entity.TranslationEntity;
-import md.zamolxis.multilanguage.exception.MultilanguageExceptionData.MultilanguageExceptionDataType;
 import md.zamolxis.multilanguage.exception.MultilanguageException;
+import md.zamolxis.multilanguage.exception.MultilanguageExceptionData.MultilanguageExceptionDataType;
 
 public abstract class GenericService {
 
@@ -57,7 +57,8 @@ public abstract class GenericService {
 		entityNotDefined(current, name);
 		readNotFound(previous, name);
 		if (!equals(previous.getVersion(), current.getVersion())) {
-			throw new MultilanguageException(MultilanguageExceptionDataType.UPDATE_OBSOLETE_TIMESTAMP, new Object[] { name });
+			throw new MultilanguageException(MultilanguageExceptionDataType.UPDATE_OBSOLETE_TIMESTAMP,
+					new Object[] { name });
 		}
 	}
 
@@ -66,7 +67,8 @@ public abstract class GenericService {
 		entityNotDefined(current, name);
 		readNotFound(previous, name);
 		if (!equals(previous.getVersion(), current.getVersion())) {
-			throw new MultilanguageException(MultilanguageExceptionDataType.DELETE_OBSOLETE_TIMESTAMP, new Object[] { name });
+			throw new MultilanguageException(MultilanguageExceptionDataType.DELETE_OBSOLETE_TIMESTAMP,
+					new Object[] { name });
 		}
 	}
 
