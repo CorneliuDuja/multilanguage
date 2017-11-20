@@ -91,6 +91,10 @@ public abstract class GenericService {
 		return timestamp;
 	}
 
+	public Timestamp getCurrentTimestamp() {
+		return getCurrentTimestamp(null);
+	}
+
 	public Timestamp getMaxTimestamp() {
 		return new Timestamp(settingsService.getTimestampMax());
 	}

@@ -10,7 +10,7 @@ import md.zamolxis.multilanguage.entity.TenantEntity;
 public interface ResourceRepository extends JpaRepository<ResourceEntity, String> {
 
 	@Query("select x from resource x where x.tenant = :tenant and x.code = :code and x.category = :category")
-	ResourceEntity find(@Param("tenant") TenantEntity tenant, @Param("code") String code,
+	ResourceEntity read(@Param("tenant") TenantEntity tenant, @Param("code") String code,
 			@Param("category") String category);
 
 }

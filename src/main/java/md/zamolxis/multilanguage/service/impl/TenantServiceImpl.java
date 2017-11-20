@@ -31,21 +31,21 @@ public class TenantServiceImpl extends GenericService implements TenantService {
 	@Override
 	@Transactional(rollbackOn = Exception.class)
 	public TenantEntity read(TenantEntity tenant) throws MultilanguageException {
-		TenantEntity find = null;
+		TenantEntity read = null;
 		if (tenant != null) {
 			String id = tenant.getId();
 			if (id != null) {
-				find = tenantRepository.findOne(id);
+				read = tenantRepository.findOne(id);
 			}
-			if (find == null) {
+			if (read == null) {
 				String code = tenant.getCode();
 				if (code != null) {
-					find = tenantRepository.find(code);
+					read = tenantRepository.read(code);
 				}
 			}
 		}
-		refresh(find);
-		return find;
+		refresh(read);
+		return read;
 	}
 
 	@Override

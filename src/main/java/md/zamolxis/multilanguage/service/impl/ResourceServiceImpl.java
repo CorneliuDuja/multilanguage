@@ -36,23 +36,23 @@ public class ResourceServiceImpl extends GenericService implements ResourceServi
 	@Override
 	@Transactional(rollbackOn = Exception.class)
 	public ResourceEntity read(ResourceEntity resource) throws MultilanguageException {
-		ResourceEntity find = null;
+		ResourceEntity read = null;
 		if (resource != null) {
 			String id = resource.getId();
 			if (id != null) {
-				find = resourceRepository.findOne(id);
+				read = resourceRepository.findOne(id);
 			}
-			if (find == null) {
+			if (read == null) {
 				TenantEntity tenant = tenantService.read(resource.getTenant());
 				String code = resource.getCode();
 				String category = resource.getCategory();
 				if (tenant != null && code != null) {
-					find = resourceRepository.find(tenant, code, category);
+					read = resourceRepository.read(tenant, code, category);
 				}
 			}
 		}
-		refresh(find);
-		return find;
+		refresh(read);
+		return read;
 	}
 
 	@Override

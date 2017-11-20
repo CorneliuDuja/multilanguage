@@ -36,22 +36,22 @@ public class CultureServiceImpl extends GenericService implements CultureService
 	@Override
 	@Transactional(rollbackOn = Exception.class)
 	public CultureEntity read(CultureEntity culture) throws MultilanguageException {
-		CultureEntity find = null;
+		CultureEntity read = null;
 		if (culture != null) {
 			String id = culture.getId();
 			if (id != null) {
-				find = cultureRepository.findOne(id);
+				read = cultureRepository.findOne(id);
 			}
-			if (find == null) {
+			if (read == null) {
 				TenantEntity tenant = tenantService.read(culture.getTenant());
 				String code = culture.getCode();
 				if (tenant != null && code != null) {
-					find = cultureRepository.find(tenant, code);
+					read = cultureRepository.read(tenant, code);
 				}
 			}
 		}
-		refresh(find);
-		return find;
+		refresh(read);
+		return read;
 	}
 
 	@Override

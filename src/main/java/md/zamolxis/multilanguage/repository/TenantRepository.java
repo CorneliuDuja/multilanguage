@@ -9,6 +9,6 @@ import md.zamolxis.multilanguage.entity.TenantEntity;
 public interface TenantRepository extends JpaRepository<TenantEntity, String> {
 
 	@Query("select x from tenant x where x.code = :code")
-	TenantEntity find(@Param("code") String code);
+	TenantEntity read(@Param("code") String code);
 
 }

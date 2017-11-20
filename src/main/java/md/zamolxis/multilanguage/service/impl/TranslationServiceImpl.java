@@ -41,22 +41,22 @@ public class TranslationServiceImpl extends GenericService implements Translatio
 	@Override
 	@Transactional(rollbackOn = Exception.class)
 	public TranslationEntity read(TranslationEntity translation) throws MultilanguageException {
-		TranslationEntity find = null;
+		TranslationEntity read = null;
 		if (translation != null) {
 			String id = translation.getId();
 			if (id != null) {
-				find = translationRepository.findOne(id);
+				read = translationRepository.findOne(id);
 			}
-			if (find == null) {
+			if (read == null) {
 				CultureEntity culture = cultureService.read(translation.getCulture());
 				ResourceEntity resource = resourceService.read(translation.getResource());
 				if (culture != null && resource != null) {
-					find = translationRepository.find(culture, resource);
+					read = translationRepository.read(culture, resource);
 				}
 			}
 		}
-		refresh(find);
-		return find;
+		refresh(read);
+		return read;
 	}
 
 	@Override
