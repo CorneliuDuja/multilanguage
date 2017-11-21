@@ -16,7 +16,7 @@ import md.zamolxis.multilanguage.service.GenericOutput;
 import md.zamolxis.multilanguage.service.TranslationService;
 
 @RestController
-@RequestMapping("/Translation")
+@RequestMapping("/translation")
 public class TranslationRestController {
 
 	@Autowired

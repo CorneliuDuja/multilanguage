@@ -43,52 +43,46 @@ public class MultilanguageServiceImpl extends GenericService implements Multilan
 	@Transactional(rollbackOn = Exception.class)
 	public String translate(String tenantCode, String cultureCode, String resourceCode, String resourceCategory)
 			throws MultilanguageException {
-		String sense = resourceCode;
-		TenantEntity tenant = new TenantEntity();
-		tenant.setCode(tenantCode);
-		tenant.setName(tenantCode);
-		TenantEntity tenantRead = tenantRepository.read(tenantCode);
-		if (tenantRead == null) {
-			tenantRead = tenantRepository.saveAndFlush(tenant);
-		}
-		tenant = tenantRead;
-		CultureEntity culture = new CultureEntity();
-		culture.setTenant(tenant);
-		culture.setCode(cultureCode);
-		culture.setName(cultureCode);
-		CultureEntity cultureRead = cultureRepository.read(tenant, cultureCode);
-		if (cultureRead == null) {
-			cultureRead = cultureRepository.saveAndFlush(culture);
-		}
-		culture = cultureRead;
+		String translate = resourceCode;
 		Timestamp timestamp = getCurrentTimestamp();
-		ResourceEntity resource = new ResourceEntity();
-		resource.setTenant(tenantRead);
-		resource.setCode(resourceCode);
-		resource.setCategory(resourceCategory);
-		resource.setCreated(timestamp);
-		resource.setUsed(timestamp);
-		ResourceEntity resourceRead = resourceRepository.read(tenant, resourceCode, resourceCategory);
-		if (resourceRead == null) {
-			resourceRead = resourceRepository.saveAndFlush(resource);
+		TenantEntity tenant = tenantRepository.read(tenantCode);
+		if (tenant == null) {
+			tenant = new TenantEntity();
+			tenant.setCode(tenantCode);
+			tenant.setName(tenantCode);
+			tenant = tenantRepository.saveAndFlush(tenant);
+		}
+		CultureEntity culture = cultureRepository.read(tenant, cultureCode);
+		if (culture == null) {
+			culture = new CultureEntity();
+			culture.setTenant(tenant);
+			culture.setCode(cultureCode);
+			culture.setName(cultureCode);
+			culture = cultureRepository.saveAndFlush(culture);
+		}
+		ResourceEntity resource = resourceRepository.read(tenant, resourceCode, resourceCategory);
+		if (resource == null) {
+			resource = new ResourceEntity();
+			resource.setTenant(tenant);
+			resource.setCode(resourceCode);
+			resource.setCategory(resourceCategory);
+			resource.setCreated(timestamp);
+			resource.setUsed(timestamp);
+			resource = resourceRepository.saveAndFlush(resource);
 		} else {
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(timestamp);
 			calendar.add(Calendar.DATE, -settingsService.getLatencyDays());
-			if (resourceRead.getUsed().getTime() < calendar.getTimeInMillis()) {
-				resourceRead.setUsed(timestamp);
-				resourceRead = resourceRepository.saveAndFlush(resourceRead);
+			if (resource.getUsed().getTime() < calendar.getTimeInMillis()) {
+				resource.setUsed(timestamp);
+				resource = resourceRepository.saveAndFlush(resource);
 			}
 		}
-		resource = resourceRead;
-		TranslationEntity translation = new TranslationEntity();
-		translation.setCulture(culture);
-		translation.setResource(resource);
-		TranslationEntity translationRead = translationRepository.read(culture, resource);
-		if (translationRead != null) {
-			sense = translationRead.getSense();
+		TranslationEntity translation = translationRepository.read(culture, resource);
+		if (translation != null) {
+			translate = translation.getSense();
 		}
-		return sense;
+		return translate;
 	}
 
 }

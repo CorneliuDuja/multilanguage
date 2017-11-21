@@ -16,7 +16,7 @@ import md.zamolxis.multilanguage.service.GenericOutput;
 import md.zamolxis.multilanguage.service.TenantService;
 
 @RestController
-@RequestMapping("/Tenant")
+@RequestMapping("/tenant")
 public class TenantRestController {
 
 	@Autowired

@@ -45,9 +45,8 @@ public class ResourceServiceImpl extends GenericService implements ResourceServi
 			if (read == null) {
 				TenantEntity tenant = tenantService.read(resource.getTenant());
 				String code = resource.getCode();
-				String category = resource.getCategory();
 				if (tenant != null && code != null) {
-					read = resourceRepository.read(tenant, code, category);
+					read = resourceRepository.read(tenant, code, resource.getCategory());
 				}
 			}
 		}

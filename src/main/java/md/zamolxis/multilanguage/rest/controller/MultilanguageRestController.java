@@ -1,5 +1,7 @@
 package md.zamolxis.multilanguage.rest.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,17 +14,18 @@ import md.zamolxis.multilanguage.exception.MultilanguageException;
 import md.zamolxis.multilanguage.service.MultilanguageService;
 
 @RestController
-@RequestMapping("/Multilanguage")
+@RequestMapping("/multilanguage")
 public class MultilanguageRestController {
 
 	@Autowired
 	public MultilanguageService multilanguageService;
 
 	@RequestMapping(value = "/translate", method = RequestMethod.GET)
-	public ResponseEntity<?> translate(@RequestParam String tenantCode, @RequestParam String cultureCode,
-			@RequestParam String resourceCode, @RequestParam String resourceCategory) throws MultilanguageException {
+	public ResponseEntity<?> translate(@RequestParam String tenant, @RequestParam String culture,
+			@RequestParam String resource, @RequestParam Optional<String> category) throws MultilanguageException {
 		return new ResponseEntity<>(
-				multilanguageService.translate(tenantCode, cultureCode, resourceCode, resourceCategory), HttpStatus.OK);
+				multilanguageService.translate(tenant, culture, resource, category.isPresent() ? category.get() : null),
+				HttpStatus.OK);
 	}
 
 }

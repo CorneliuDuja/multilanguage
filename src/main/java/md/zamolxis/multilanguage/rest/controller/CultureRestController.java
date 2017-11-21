@@ -16,7 +16,7 @@ import md.zamolxis.multilanguage.service.CultureService;
 import md.zamolxis.multilanguage.service.GenericOutput;
 
 @RestController
-@RequestMapping("/Culture")
+@RequestMapping("/culture")
 public class CultureRestController {
 
 	@Autowired

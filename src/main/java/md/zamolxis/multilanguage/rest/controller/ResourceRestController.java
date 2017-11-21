@@ -16,7 +16,7 @@ import md.zamolxis.multilanguage.service.GenericOutput;
 import md.zamolxis.multilanguage.service.ResourceService;
 
 @RestController
-@RequestMapping("/Resource")
+@RequestMapping("/resource")
 public class ResourceRestController {
 
 	@Autowired
