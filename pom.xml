@@ -7,10 +7,10 @@
 		<version>1.5.3.RELEASE</version>
 	</parent>
 	<groupId>md-zamolxis-multilanguage</groupId>
-	<artifactId>zamolxis-multilanguage</artifactId>
+	<artifactId>multilanguage-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>multilanguage</name>
+	<name>multilanguage-server</name>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
@@ -39,7 +39,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>multilanguage</finalName>
+		<finalName>multilanguage-server</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
